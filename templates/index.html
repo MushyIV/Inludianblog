@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<title>{{ title }}</title>
+</head>
+
+
+
+<body>
+
+<h1>Blog List:</h1>
+
+{% for obj in object_list %}
+{% url "posts:detail" id=obj.id %}
+
+<span> Title: </span> <a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><br/>
+<span> ID: </span> {{ obj.id }}<br/>
+<span> Content: </span> {{ obj.content }}<br/>
+<span> Timestamp: </span> {{ obj.timestamp }}<br/>
+<span> Updatd: </span> {{ obj.updated }}<br/>
+<br/>
+
+
+
+{% endfor %}
+
+</body>
+
+
+</html>
