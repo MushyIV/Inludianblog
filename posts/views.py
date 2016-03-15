@@ -18,7 +18,7 @@ def posts_create(request):
 		return HttpResponseRedirect(instance.get_absolute_url())
 
 	else:
-		messages.success(request, "Successfully Created!")
+		messages.error(request, "Failed to create!")
 
 	context_data = {
 		"form":form,
@@ -52,7 +52,7 @@ def posts_list(request): # List items
 		"title" : "List",
 	}
 		
-	return render(request, "index.html", context_data)
+	return render(request, "base.html", context_data)
 
 # </listpage>
 
@@ -66,7 +66,7 @@ def posts_update(request, id=None):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
-		messages.success(request, "Successfully saved!")
+		messages.success(request, "Item saved!", extra_tags='html_safe')
 		return HttpResponseRedirect(instance.get_absolute_url())
 
 	context_data = {
@@ -85,6 +85,6 @@ def posts_delete(request, id=None):
 	instance = get_object_or_404(Post,id=id)
 	instance.delete()
 	messages.success(request, "Successfully deleted!")
-	return redirect("posts:list")
+	return redirect("posts_lists.html")
 
 # </deletepage>	
